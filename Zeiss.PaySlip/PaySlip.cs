@@ -31,7 +31,9 @@ namespace Zeiss.PaySlip
             Console.WriteLine(empID);
             EmployeeBL emp = new EmployeeBL();
             emp = emp.GetEmpDetails(empID);
-            Console.WriteLine(emp.empId+ " " + emp.firstName+ " " + emp.lastName);
+            Console.WriteLine("Employee :" + emp.empId+ " " + "by name " + emp.firstName+ " " + emp.lastName);
+            Console.WriteLine("---------");
+            Console.WriteLine("");
         }
     }
 }

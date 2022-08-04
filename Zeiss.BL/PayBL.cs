@@ -33,7 +33,7 @@ namespace Zeiss.BL
         {
             int basicPay = GetBasicPay(empID, month, year);
             int hra = 0;
-            hra = basicPay * 50 / 100;
+            hra = basicPay * 15 / 100;
             return hra;
         }
     }
@@ -43,17 +43,30 @@ namespace Zeiss.BL
         public string firstName;
         public string lastName;
         public string DOJ;
+        public Int16 month;
+        public Int16 year;
+        public int Basepay;
+        public int DA;
+        public int HRA;
 
         public EmployeeBL GetEmpDetails(string empID)
         {
             EmployeeDA empD1 = new EmployeeDA();
             empD1 = empD1.GetEmployeeDetails(empID);
 
+            PayBL Basic_pay = new PayBL();
+            Basepay = Basic_pay.GetBasicPay(empID, month, year);
+            DA = Basic_pay.CalculateDA(empID, month, year);
+            HRA = Basic_pay.CalculateHRA(empID, month, year);
+
             EmployeeBL empB1 = new EmployeeBL();
             empB1.empId = empD1.empID;
             empB1.firstName = empD1.firstName;
             empB1.lastName = empD1.lastName;
             empB1.DOJ = empD1.DOJ;
+            empB1.Basepay = Basepay;
+            empB1.DA = DA;
+            empB1.HRA = HRA;
 
             return empB1;
 
